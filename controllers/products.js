@@ -16,9 +16,10 @@ export const createProduct = async (req, res, next) => {
     const {
       body: { name, description, stock, price }
     } = req;
+    console.log(req);
     const {
       rows: [newProduct]
-    } = await db.query(`INSERT INTO products(name, description, stock, price) VALUES($1, $2, $3, $4) RETURNING *`, [
+    } = await db.query(`INSERT INTO products (name, description, stock, price) VALUES($1, $2, $3, $4) RETURNING *`, [
       name,
       description,
       stock,
