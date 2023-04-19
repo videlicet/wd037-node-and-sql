@@ -3,10 +3,13 @@ import { createOrder, deleteOrder, getOrder, getOrders, updateOrder } from '../c
 
 const ordersRouter = Router();
 
-ordersRouter.get('/', getOrders);
-ordersRouter.post('/', createOrder);
-ordersRouter.get('/:id', getOrder);
-ordersRouter.put('/:id', updateOrder);
-ordersRouter.delete('/:id', deleteOrder);
+ordersRouter.route('/')
+    .get( getOrders)
+    .post(createOrder);
+
+ordersRouter.route('/:id')
+    .get(getOrder)
+    .put(updateOrder)
+    .delete(deleteOrder);
 
 export default ordersRouter;

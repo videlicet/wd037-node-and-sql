@@ -6,6 +6,8 @@ import errorHandler from './middlewares/errorHandler.js';
 const port = process.env.PORT || 8000;
 const app = express();
 
+console.log(process.env)
+
 app.use(express.json());
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);

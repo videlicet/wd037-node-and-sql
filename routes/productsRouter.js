@@ -3,8 +3,13 @@ import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } 
 
 const productsRouter = Router();
 
-productsRouter.route('/').get(getProducts).post(createProduct);
+productsRouter.route('/')
+    .get(getProducts)
+    .post(createProduct);
 
-productsRouter.route('/:id').get(getProduct).put(updateProduct).delete(deleteProduct);
+productsRouter.route('/:id')
+    .get(getProduct)
+    .put(updateProduct)
+    .delete(deleteProduct);
 
 export default productsRouter;
