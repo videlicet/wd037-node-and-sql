@@ -14,15 +14,15 @@ export const getProducts = async (req, res, next) => {
 export const createProduct = async (req, res, next) => {
   try {
     const {
-      body: { name, description, stock, unitPrice }
+      body: { name, description, stock, price }
     } = req;
     const {
       rows: [newProduct]
-    } = await db.query(`INSERT INTO products(name, description, stock, unit_price) VALUES($1, $2, $3, $4) RETURNING *`, [
+    } = await db.query(`INSERT INTO products(name, description, stock, price) VALUES($1, $2, $3, $4) RETURNING *`, [
       name,
       description,
       stock,
-      unitPrice
+      price
     ]);
     res.status(201).json(newProduct);
   } catch (error) {
