@@ -9,26 +9,7 @@ export const getOrders = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
-
-export const createOrder = async (req, res, next) => {
-  try {
-    const {
-      body: { id, price, date, user_id }
-    } = req;
-    const {
-      rows: [newOrder]
-    } = await db.query(`INSERT INTO orders (id, price, date, user_id) VALUES($1, $2, $3, $4) RETURNING *`, [
-      id,
-      price,
-      date,
-      user_id
-    ]);
-    res.status(201).json(newOrder);
-  } catch (error) {
-    next(error);
-  }
-};
+}
 
 export const getOrder = async (req, res, next) => {
   try {
