@@ -46,10 +46,41 @@ export const getProduct = async (req, res, next) => {
   }
 };
 
-export const updateProduct = (req, res) => {
-  res.json({ msg: 'PUT a product' });
+export const updateProduct = async (req, res, next) => {
+  try {
+    const {
+      body: { name, description, stock, price },
+      params: { id }
+    } = req;
+    console.log(req);
+    const {
+      rowCount,
+      rows: [product]
+    } = await db.query('UPDATE products SET (name, description, stock, price) = ($1, $2, $3, $4) WHERE id = $1', [
+      name,
+      description,
+      stock,
+      price
+    ]);
+    if (!rowCount) throw new ErrorResponse(`Product with id of ${id} does not exist`, 404);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 };
 
-export const deleteProduct = (req, res) => {
-  res.json({ msg: 'DELETE a product' });
+export const deleteProduct = async (req, res, next) => {
+  try {
+    const {
+      params: { id }
+    } = req;
+    const {
+      rowCount,
+      rows: [product]
+    } = await db.query('DELETE FROM products WHERE id = $1', [id]);
+    if (!rowCount) throw new ErrorResponse(`Product with id of ${id} does not exist`, 404);
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
 };
